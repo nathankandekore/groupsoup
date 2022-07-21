@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import Logo from "./logo.svg";
 // import Logo2 from "./logo2.svg";
+import Timer from "./timer";
 
 function App() {
   return (
@@ -11,7 +12,10 @@ function App() {
         <img className="logo" src={Logo} alt="logo" />
       </div>
 
-      <div className="timer">timer</div>
+      <div className="timer">
+        <Timer />
+      </div>
+
       <div className="textbox-container">
         <textarea
           className="case-presentation textbox-sizing"
