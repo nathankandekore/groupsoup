@@ -3,25 +3,24 @@ import { useState } from "react";
 import "./App.css";
 import Logo from "./logo.svg";
 
-// import Logo2 from "./logo2.svg";
-// import Timer from "./timer";
-
 function App() {
-  // let minutes = 20;
-  // let seconds = 0;
+  const [displayTime, setDisplayTime] = useState(25 * 60);
 
-  const [seconds, setSeconds] = useState(0);
-  const [minutes, setMinutes] = useState(20);
+  const formatTime = (time) => {
+    let minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+    return (
+      (minutes < 10 ? "0" + minutes : minutes) +
+      ":" +
+      (seconds < 10 ? "0" + seconds : seconds)
+    );
+  };
 
-  function startTimer(event) {
-    if (minutes > 0) {
-      setMinutes((minutes) => minutes - 1);
-      setSeconds((seconds) => (seconds = 59));
-    }
+  const startTimer = () => {
     setInterval(() => {
-      setSeconds((seconds) => seconds - 1);
+      setDisplayTime((displayTime) => displayTime - 1);
     }, 1000);
-  }
+  };
 
   return (
     <div className="App">
@@ -31,11 +30,8 @@ function App() {
       </div>
 
       <div className="timer">
-        <div className="clock-container">
-          {minutes < 10 ? `0${minutes}` : minutes}:
-          {seconds < 10 ? `0${seconds}` : seconds}
-        </div>
-        <button className="timer-btn" onClick={() => startTimer()}>
+        <div className="clock-container">{formatTime(displayTime)}</div>
+        <button className="timer-btn" onClick={startTimer}>
           start
         </button>
       </div>
