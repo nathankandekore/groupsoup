@@ -2,9 +2,11 @@ import React from "react";
 import { useState } from "react";
 import "./App.css";
 import Logo from "./logo.svg";
+// import Timer from "./Timer";
 
 function App() {
   const [displayTime, setDisplayTime] = useState(25 * 60);
+  const [timerActive, setTimerActive] = useState(false);
 
   const formatTime = (time) => {
     let minutes = Math.floor(time / 60);
@@ -18,8 +20,13 @@ function App() {
 
   const startTimer = () => {
     setInterval(() => {
+      setTimerActive((active) => (active = !timerActive));
       setDisplayTime((displayTime) => displayTime - 1);
     }, 1000);
+  };
+
+  const stopTimer = () => {
+    setDisplayTime((displayTime) => displayTime);
   };
 
   return (
@@ -31,9 +38,15 @@ function App() {
 
       <div className="timer">
         <div className="clock-container">{formatTime(displayTime)}</div>
-        <button className="timer-btn" onClick={startTimer}>
-          start
-        </button>
+        {timerActive === false ? (
+          <button className="timer-btn" onClick={startTimer}>
+            START
+          </button>
+        ) : (
+          <button className="timer-btn" onClick={clearInterval(stopTimer)}>
+            STOP
+          </button>
+        )}
       </div>
 
       <div className="textbox-container">

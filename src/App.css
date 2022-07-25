@@ -48,7 +48,7 @@ h1{
 }
 
 .timer-btn{
-  width: 50%;
+  width: 20%;
   align-self: center;
   padding: .5rem .2rem .6rem .2rem;
   background-color: white;
@@ -59,6 +59,8 @@ h1{
   font-size: large;
   cursor: pointer;
 }
+
+
 
 .timer-btn:active {
   
