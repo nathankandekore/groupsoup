@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import "./App.css";
 import Logo from "./logo.svg";
@@ -18,16 +18,14 @@ function App() {
     );
   };
 
-  const startTimer = () => {
-    setInterval(() => {
-      setTimerActive((active) => (active = !timerActive));
-      setDisplayTime((displayTime) => displayTime - 1);
-    }, 1000);
-  };
-
-  const stopTimer = () => {
-    setDisplayTime((displayTime) => displayTime);
-  };
+  useEffect(() => {
+    if (timerActive) {
+      const id = setInterval(() => {
+        setDisplayTime((displayTime) => displayTime - 1);
+      }, 1000);
+      return () => clearInterval(id);
+    }
+  }, [timerActive]);
 
   return (
     <div className="App">
@@ -39,11 +37,11 @@ function App() {
       <div className="timer">
         <div className="clock-container">{formatTime(displayTime)}</div>
         {timerActive === false ? (
-          <button className="timer-btn" onClick={startTimer}>
+          <button className="timer-btn" onClick={() => setTimerActive(true)}>
             START
           </button>
         ) : (
-          <button className="timer-btn" onClick={clearInterval(stopTimer)}>
+          <button className="timer-btn" onClick={() => setTimerActive(false)}>
             STOP
           </button>
         )}
