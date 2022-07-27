@@ -27,6 +27,9 @@ function App() {
     }
   }, [timerActive]);
 
+  //reset logic: on click, setDisplay time == 25* 60
+  //reset button only to appear if clock stopped (timer active is false)
+
   return (
     <div className="App">
       <div className="titleAndLogo">
@@ -46,7 +49,16 @@ function App() {
           </button>
         )}
       </div>
-
+      {timerActive === false ? (
+        <button
+          className="reset-btn"
+          onClick={() => {
+            setDisplayTime((displayTime) => 25 * 60);
+          }}
+        >
+          reset
+        </button>
+      ) : null}
       <div className="textbox-container">
         <textarea
           className="case-presentation textbox-sizing"

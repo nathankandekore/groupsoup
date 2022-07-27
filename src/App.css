@@ -60,12 +60,27 @@ h1{
   cursor: pointer;
 }
 
+/* .timer-btn:active {
 
+  transform: translateY(2px);
+} */
 
-.timer-btn:active {
-  
+.reset-btn{
+  font-family: 'Baloo 2', cursive;
+    background-color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 1rem;
+    color: #79B791;
+    margin-left: 1rem;
+}
+
+.reset-btn:active{
   transform: translateY(2px);
 }
+
+
+
 
 
 .textbox-container{
