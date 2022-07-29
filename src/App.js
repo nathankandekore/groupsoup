@@ -2,11 +2,16 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import "./App.css";
 import Logo from "./logo.svg";
-// import Timer from "./Timer";
+import sound from "./Censor Beep Sound Effect (1).mp3";
 
 function App() {
-  const [displayTime, setDisplayTime] = useState(25 * 60);
+  const [displayTime, setDisplayTime] = useState(1 * 60);
   const [timerActive, setTimerActive] = useState(false);
+  // const [soundAudio, setSoundAudio] = useState(new Audio(sound));
+
+  const playSoundAudio = () => {
+    new Audio(sound).play();
+  };
 
   const formatTime = (time) => {
     let minutes = Math.floor(time / 60);
@@ -21,11 +26,18 @@ function App() {
   useEffect(() => {
     if (timerActive) {
       const id = setInterval(() => {
-        setDisplayTime((displayTime) => displayTime - 1);
+        if (displayTime > 0) {
+          setDisplayTime((displayTime) => displayTime - 1);
+        } else {
+          playSoundAudio();
+          setDisplayTime((displayTime) => null);
+          setTimerActive((timer) => (timer = false));
+          setDisplayTime((displayTime) => 25 * 60);
+        }
       }, 1000);
       return () => clearInterval(id);
     }
-  }, [timerActive]);
+  }, [timerActive, displayTime]);
 
   //reset logic: on click, setDisplay time == 25* 60
   //reset button only to appear if clock stopped (timer active is false)
