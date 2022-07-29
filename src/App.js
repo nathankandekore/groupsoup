@@ -5,9 +5,13 @@ import Logo from "./logo.svg";
 import sound from "./Censor Beep Sound Effect (1).mp3";
 
 function App() {
-  const [displayTime, setDisplayTime] = useState(1 * 60);
+  const [displayTime, setDisplayTime] = useState(25 * 60);
   const [timerActive, setTimerActive] = useState(false);
-  // const [soundAudio, setSoundAudio] = useState(new Audio(sound));
+  const [email, setEmail] = useState("");
+  const [casePresentation, setCasePresentation] = useState("");
+  const [clarifyingQuestions, setClarifyingQuestions] = useState("");
+  const [hypothesizing, setHypothesizing] = useState("");
+  const [reflection, setReflection] = useState("");
 
   const playSoundAudio = () => {
     new Audio(sound).play();
@@ -21,6 +25,16 @@ function App() {
       ":" +
       (seconds < 10 ? "0" + seconds : seconds)
     );
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // const completeForm = {
+    //   casePresentation,
+    //   clarifyingQuestions,
+    //   hypothesizing,
+    //   reflection,
+    // };
   };
 
   useEffect(() => {
@@ -71,29 +85,47 @@ function App() {
           reset
         </button>
       ) : null}
-      <div className="textbox-container">
+      <form className="textbox-container" onSubmit={handleSubmit}>
         <textarea
+          type="text"
+          value={casePresentation}
+          onChange={(e) => setCasePresentation(e.target.value)}
           className="case-presentation textbox-sizing"
           placeholder="case presentation"
           spellCheck="false"
         ></textarea>
         <textarea
+          type="text"
+          value={clarifyingQuestions}
+          onChange={(e) => setClarifyingQuestions(e.target.value)}
           className="clarifying-questions textbox-sizing"
           placeholder="clarifying questions"
           spellCheck="false"
         ></textarea>
         <textarea
+          type="text"
+          value={hypothesizing}
+          onChange={(e) => setHypothesizing(e.target.value)}
           className="hypothesizing textbox-sizing"
           placeholder="hypothesizing"
           spellCheck="false"
         ></textarea>
         <textarea
+          type="text"
+          value={reflection}
+          onChange={(e) => setReflection(e.target.value)}
           className="reflection textbox-sizing"
           placeholder="reflection"
           spellCheck="false"
         ></textarea>
-      </div>
-      <button>finish</button>
+        <div>
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          ></input>
+          <button>finish</button>
+        </div>
+      </form>
     </div>
   );
 }
