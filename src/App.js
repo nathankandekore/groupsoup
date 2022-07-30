@@ -12,6 +12,12 @@ function App() {
   const [clarifyingQuestions, setClarifyingQuestions] = useState("");
   const [hypothesizing, setHypothesizing] = useState("");
   const [reflection, setReflection] = useState("");
+  const formData = {
+    case: casePresentation,
+    questions: clarifyingQuestions,
+    hypothesis: hypothesizing,
+    reflect: reflection,
+  };
 
   const playSoundAudio = () => {
     new Audio(sound).play();
@@ -29,6 +35,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(formData);
     // const completeForm = {
     //   casePresentation,
     //   clarifyingQuestions,
