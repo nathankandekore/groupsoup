@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./App.css";
 import Logo from "./logo.svg";
 import sound from "./Censor Beep Sound Effect (1).mp3";
+// import CompleteForm from "./CompleteForm";
 
 function App() {
   const [displayTime, setDisplayTime] = useState(25 * 60);
@@ -12,12 +13,6 @@ function App() {
   const [clarifyingQuestions, setClarifyingQuestions] = useState("");
   const [hypothesizing, setHypothesizing] = useState("");
   const [reflection, setReflection] = useState("");
-  const formData = {
-    case: casePresentation,
-    questions: clarifyingQuestions,
-    hypothesis: hypothesizing,
-    reflect: reflection,
-  };
 
   const playSoundAudio = () => {
     new Audio(sound).play();
@@ -33,16 +28,21 @@ function App() {
     );
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    // const completeForm = {
-    //   casePresentation,
-    //   clarifyingQuestions,
-    //   hypothesizing,
-    //   reflection,
-    // };
-  };
+  // const printForm = () => {
+  //   const formData = {
+  //     presentation: casePresentation,
+  //     questions: clarifyingQuestions,
+  //     hypothesis: hypothesizing,
+  //     reflect: reflection
+  //   }
+  //    const handleSubmit = useReactToPrint({
+
+  //   content: ()=> formData.current
+  // })
+  // }
+
+  // <CompleteForm content={CompleteForm} trigger={() => handleSubmit} />; // change this??
+  // console.log(CompleteForm);
 
   useEffect(() => {
     if (timerActive) {
@@ -92,7 +92,7 @@ function App() {
           reset
         </button>
       ) : null}
-      <form className="textbox-container" onSubmit={handleSubmit}>
+      <form className="textbox-container">
         <textarea
           type="text"
           value={casePresentation}
@@ -130,7 +130,7 @@ function App() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           ></input>
-          <button>finish</button>
+          <button class="finish-btn">finish</button>
         </div>
       </form>
     </div>
