@@ -1,18 +1,24 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./App.css";
 import Logo from "./logo.svg";
 import sound from "./Censor Beep Sound Effect (1).mp3";
-// import CompleteForm from "./CompleteForm";
+import ReactToPrint from "react-to-print";
+import { ComponentToPrint } from "./Components/ComponentToPrint";
 
 function App() {
   const [displayTime, setDisplayTime] = useState(25 * 60);
   const [timerActive, setTimerActive] = useState(false);
-  const [email, setEmail] = useState("");
   const [casePresentation, setCasePresentation] = useState("");
   const [clarifyingQuestions, setClarifyingQuestions] = useState("");
   const [hypothesizing, setHypothesizing] = useState("");
   const [reflection, setReflection] = useState("");
+  const componentRef = useRef(
+    casePresentation,
+    clarifyingQuestions,
+    hypothesizing,
+    reflection
+  );
 
   const playSoundAudio = () => {
     new Audio(sound).play();
@@ -27,22 +33,6 @@ function App() {
       (seconds < 10 ? "0" + seconds : seconds)
     );
   };
-
-  // const printForm = () => {
-  //   const formData = {
-  //     presentation: casePresentation,
-  //     questions: clarifyingQuestions,
-  //     hypothesis: hypothesizing,
-  //     reflect: reflection
-  //   }
-  //    const handleSubmit = useReactToPrint({
-
-  //   content: ()=> formData.current
-  // })
-  // }
-
-  // <CompleteForm content={CompleteForm} trigger={() => handleSubmit} />; // change this??
-  // console.log(CompleteForm);
 
   useEffect(() => {
     if (timerActive) {
@@ -59,9 +49,6 @@ function App() {
       return () => clearInterval(id);
     }
   }, [timerActive, displayTime]);
-
-  //reset logic: on click, setDisplay time == 25* 60
-  //reset button only to appear if clock stopped (timer active is false)
 
   return (
     <div className="App">
@@ -126,11 +113,16 @@ function App() {
           spellCheck="false"
         ></textarea>
         <div>
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></input>
-          <button class="finish-btn">finish</button>
+          <ReactToPrint
+            trigger={
+              () => (
+                <button onClick={() => <ComponentToPrint />}>PRINT me</button>
+              )
+              //can return a React component or element
+            }
+            //returns the reference of the component you want to print
+            content={() => componentRef}
+          />
         </div>
       </form>
     </div>
