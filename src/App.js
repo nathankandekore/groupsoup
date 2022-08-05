@@ -13,13 +13,7 @@ function App() {
   const [clarifyingQuestions, setClarifyingQuestions] = useState("");
   const [hypothesizing, setHypothesizing] = useState("");
   const [reflection, setReflection] = useState("");
-  const componentRef = useRef(
-    casePresentation,
-    clarifyingQuestions,
-    hypothesizing,
-    reflection
-  );
-
+  const componentRef = useRef(ComponentToPrint.ref);
   const playSoundAudio = () => {
     new Audio(sound).play();
   };
@@ -115,13 +109,11 @@ function App() {
         <div>
           <ReactToPrint
             trigger={
-              () => (
-                <button onClick={() => <ComponentToPrint />}>PRINT me</button>
-              )
+              () => <button>PRINT me</button>
               //can return a React component or element
             }
-            //returns the reference of the component you want to print
-            content={() => componentRef}
+            //returns the reference value of the component you want to print
+            content={() => componentRef.current}
           />
         </div>
       </form>

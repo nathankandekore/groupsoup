@@ -1,8 +1,10 @@
 import React from "react";
+import { useRef } from "react";
 
 export const ComponentToPrint = React.forwardRef((props, ref) => {
+  const componentRef = useRef();
   return (
-    <div ref={props.componentRef}>
+    <div ref={componentRef}>
       <h1>Case Presentation</h1>
       <div>{props.casePresentation}</div>
       <br />
