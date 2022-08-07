@@ -4,7 +4,8 @@ import "./App.css";
 import Logo from "./logo.svg";
 import sound from "./Censor Beep Sound Effect (1).mp3";
 import ReactToPrint from "react-to-print";
-import { ComponentToPrint } from "./Components/ComponentToPrint";
+// import { ComponentToPrint } from "./Components/ComponentToPrint";
+// import { useReactToPrint } from "react-to-print";
 
 function App() {
   const [displayTime, setDisplayTime] = useState(25 * 60);
@@ -13,10 +14,16 @@ function App() {
   const [clarifyingQuestions, setClarifyingQuestions] = useState("");
   const [hypothesizing, setHypothesizing] = useState("");
   const [reflection, setReflection] = useState("");
-  const componentRef = useRef(ComponentToPrint.ref);
+  const componentRef = useRef();
   const playSoundAudio = () => {
     new Audio(sound).play();
   };
+
+  // const Example = () => {
+  //   const componentRef = useRef();
+  //   const handlePrint = useReactToPrint({
+  //     content: () => componentRef.current,
+  //   });
 
   const formatTime = (time) => {
     let minutes = Math.floor(time / 60);
@@ -115,6 +122,11 @@ function App() {
             //returns the reference value of the component you want to print
             content={() => componentRef.current}
           />
+
+          <div ref={componentRef}>test</div>
+
+          {/* <ComponentToPrint ref={componentRef} />
+            <button onClick={Example.handlePrint}>Print this out!</button> */}
         </div>
       </form>
     </div>
