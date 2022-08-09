@@ -1,29 +1,26 @@
 import React, { useEffect } from "react";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import "./App.css";
 import Logo from "./logo.svg";
 import sound from "./Censor Beep Sound Effect (1).mp3";
-import ReactToPrint from "react-to-print";
+// import ReactToPrint from "react-to-print";
 // import { ComponentToPrint } from "./Components/ComponentToPrint";
 // import { useReactToPrint } from "react-to-print";
 
 function App() {
-  const [displayTime, setDisplayTime] = useState(25 * 60);
+  const [displayTime, setDisplayTime] = useState(20 * 60);
   const [timerActive, setTimerActive] = useState(false);
   const [casePresentation, setCasePresentation] = useState("");
   const [clarifyingQuestions, setClarifyingQuestions] = useState("");
   const [hypothesizing, setHypothesizing] = useState("");
   const [reflection, setReflection] = useState("");
-  const componentRef = useRef();
-  const playSoundAudio = () => {
-    new Audio(sound).play();
-  };
+  const [email, setEmail] = useState("");
+  const [emailString, setEmailString] = useState("");
 
-  // const Example = () => {
-  //   const componentRef = useRef();
-  //   const handlePrint = useReactToPrint({
-  //     content: () => componentRef.current,
-  //   });
+  const playSoundAudio = (cb) => {
+    new Audio(sound).play();
+    cb();
+  };
 
   const formatTime = (time) => {
     let minutes = Math.floor(time / 60);
@@ -41,15 +38,28 @@ function App() {
         if (displayTime > 0) {
           setDisplayTime((displayTime) => displayTime - 1);
         } else {
-          playSoundAudio();
-          setDisplayTime((displayTime) => null);
-          setTimerActive((timer) => (timer = false));
-          setDisplayTime((displayTime) => 25 * 60);
+          playSoundAudio(() => {
+            setDisplayTime((displayTime) => null);
+            setTimeout(() => {
+              setTimerActive((timer) => (timer = false));
+              setDisplayTime((displayTime) => 25 * 60);
+            }, 1000);
+          });
         }
       }, 1000);
       return () => clearInterval(id);
     }
   }, [timerActive, displayTime]);
+
+  const updateEmail = (e) => {
+    e.preventDefault();
+    setEmailString(
+      `mailto:${email}?subject=Mail from Our Site&body=Case Presentation:${casePresentation},
+      Clarifying Questions: ${clarifyingQuestions}, 
+      Hypothosis: ${hypothesizing},
+      Reflection: ${reflection}`
+    );
+  };
 
   return (
     <div className="App">
@@ -113,17 +123,30 @@ function App() {
           placeholder="reflection"
           spellCheck="false"
         ></textarea>
+
+        <input
+          placeholder="enter email address"
+          type="email"
+          value={email}
+          // className="reflection textbox-sizing"
+          onChange={(e) => setEmail(e.target.value)}
+        ></input>
+        <button onClick={updateEmail}>SAVE</button>
+        <a href={emailString}>
+          <button>send to email</button>
+        </a>
+
         <div>
-          <ReactToPrint
+          {/* <ReactToPrint
             trigger={
               () => <button>PRINT me</button>
               //can return a React component or element
             }
             //returns the reference value of the component you want to print
             content={() => componentRef.current}
-          />
+          /> */}
 
-          <div ref={componentRef}>test</div>
+          {/* <div ref={componentRef}>test</div> */}
 
           {/* <ComponentToPrint ref={componentRef} />
             <button onClick={Example.handlePrint}>Print this out!</button> */}
