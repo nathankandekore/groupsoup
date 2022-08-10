@@ -126,27 +126,26 @@ function App() {
           placeholder="reflection"
           spellCheck="false"
         ></textarea>
-
-        <div className="email-submit">
-          <input
-            className="email-input"
-            placeholder="enter email address"
-            type="email"
-            value={email}
-            // className="reflection textbox-sizing"
-            onChange={(e) => setEmail(e.target.value)}
-          ></input>
-          {contentSaved ? (
-            <a href={emailString} className="send-email">
-              click AGAIN to send to email address
-            </a>
-          ) : (
-            <button onClick={updateEmail} className="save-btn">
-              SAVE
-            </button>
-          )}
-        </div>
       </form>
+      <div className="email-submit">
+        <input
+          className="email-input"
+          placeholder="enter email address"
+          type="email"
+          value={email}
+          // className="reflection textbox-sizing"
+          onChange={(e) => setEmail(e.target.value)}
+        ></input>
+        {contentSaved ? (
+          <a href={emailString} className="send-email">
+            click AGAIN to send to email address
+          </a>
+        ) : (
+          <button onClick={updateEmail} className="save-btn">
+            SAVE
+          </button>
+        )}
+      </div>
     </div>
   );
 }

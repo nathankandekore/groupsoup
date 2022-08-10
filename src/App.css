@@ -144,19 +144,21 @@ h1{
 
 .email-submit{
   /* border: solid red; */
+  margin-left: 25%;
  
-  margin-left: 2rem ;
-  margin-right: 1rem;
+  
+  /* margin-right: 1rem; */
 
 }
 
 .send-email{
   /* border: solid yellow; */
+  
   margin-left: 2rem;
     margin-right: 1rem;
     background-color: yellow;
     text-decoration: none;
-    padding: .5rem .5rem .6rem .5rem;
+    padding: .5rem .5rem .5rem .5rem;
     border-radius: 1rem;
 }
 
@@ -164,15 +166,18 @@ h1{
   color: #79B791;
 }
 
-.send-email:focus{
-  outline: none;
-}
+
 
 
 
 .textbox-sizing:focus{
   outline: none;
 }
+
+.email-input{
+  outline: none;
+}
+
 ::placeholder{
   color:white;
   font-size: large;
@@ -184,5 +189,12 @@ h1{
   .textbox-container{
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
+  }
+
+  .email-submit{
+    grid-template-columns: 1fr;
+    border: solid yellow;
+    
+    
   }
 }
