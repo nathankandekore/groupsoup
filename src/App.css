@@ -118,6 +118,58 @@ h1{
  
 }
 
+.email-input{
+  width: 40%;
+  border-radius: 5px;
+  border: none;
+  background-color: #ABD1B5;
+    color: white;
+    padding: 5px;
+    font-family: 'Baloo 2', cursive;
+    font-size: medium;
+
+}
+
+.save-btn{
+  width: 20%;
+  align-self: center;
+  margin-left: 2rem;
+    padding: .5rem .2rem .6rem .2rem;
+    background-color: white;
+    color: #79B791;
+    border: none;
+    border-radius: 1rem;
+    font-family: 'Baloo 2', cursive;
+}
+
+.email-submit{
+  /* border: solid red; */
+ 
+  margin-left: 2rem ;
+  margin-right: 1rem;
+
+}
+
+.send-email{
+  /* border: solid yellow; */
+  margin-left: 2rem;
+    margin-right: 1rem;
+    background-color: yellow;
+    text-decoration: none;
+    padding: .5rem .5rem .6rem .5rem;
+    border-radius: 1rem;
+}
+
+.send-email:visited{
+  color: #79B791;
+}
+
+.send-email:focus{
+  outline: none;
+}
+
+
+
 .textbox-sizing:focus{
   outline: none;
 }

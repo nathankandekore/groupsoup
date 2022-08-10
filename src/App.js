@@ -8,7 +8,7 @@ import sound from "./Censor Beep Sound Effect (1).mp3";
 // import { useReactToPrint } from "react-to-print";
 
 function App() {
-  const [displayTime, setDisplayTime] = useState(20 * 60);
+  const [displayTime, setDisplayTime] = useState(10 * 60);
   const [timerActive, setTimerActive] = useState(false);
   const [casePresentation, setCasePresentation] = useState("");
   const [clarifyingQuestions, setClarifyingQuestions] = useState("");
@@ -16,6 +16,7 @@ function App() {
   const [reflection, setReflection] = useState("");
   const [email, setEmail] = useState("");
   const [emailString, setEmailString] = useState("");
+  const [contentSaved, setContentSaved] = useState(false);
 
   const playSoundAudio = (cb) => {
     new Audio(sound).play();
@@ -42,7 +43,7 @@ function App() {
             setDisplayTime((displayTime) => null);
             setTimeout(() => {
               setTimerActive((timer) => (timer = false));
-              setDisplayTime((displayTime) => 25 * 60);
+              setDisplayTime((displayTime) => 10 * 60);
             }, 1000);
           });
         }
@@ -59,6 +60,7 @@ function App() {
       Hypothosis: ${hypothesizing},
       Reflection: ${reflection}`
     );
+    setContentSaved(!contentSaved);
   };
 
   return (
@@ -84,7 +86,7 @@ function App() {
         <button
           className="reset-btn"
           onClick={() => {
-            setDisplayTime((displayTime) => 25 * 60);
+            setDisplayTime((displayTime) => 10 * 60);
           }}
         >
           reset
@@ -124,32 +126,24 @@ function App() {
           spellCheck="false"
         ></textarea>
 
-        <input
-          placeholder="enter email address"
-          type="email"
-          value={email}
-          // className="reflection textbox-sizing"
-          onChange={(e) => setEmail(e.target.value)}
-        ></input>
-        <button onClick={updateEmail}>SAVE</button>
-        <a href={emailString}>
-          <button>send to email</button>
-        </a>
-
-        <div>
-          {/* <ReactToPrint
-            trigger={
-              () => <button>PRINT me</button>
-              //can return a React component or element
-            }
-            //returns the reference value of the component you want to print
-            content={() => componentRef.current}
-          /> */}
-
-          {/* <div ref={componentRef}>test</div> */}
-
-          {/* <ComponentToPrint ref={componentRef} />
-            <button onClick={Example.handlePrint}>Print this out!</button> */}
+        <div className="email-submit">
+          <input
+            className="email-input"
+            placeholder="enter email address"
+            type="email"
+            value={email}
+            // className="reflection textbox-sizing"
+            onChange={(e) => setEmail(e.target.value)}
+          ></input>
+          {contentSaved ? (
+            <a href={emailString} className="send-email">
+              click AGAIN to send to email address
+            </a>
+          ) : (
+            <button onClick={updateEmail} className="save-btn">
+              SAVE
+            </button>
+          )}
         </div>
       </form>
     </div>
