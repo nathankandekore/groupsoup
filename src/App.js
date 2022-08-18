@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
+import generatePDF from "./functionality/CreatePDF";
 import "./App.css";
 import Logo from "./logo.svg";
 import sound from "./Censor Beep Sound Effect (1).mp3";
@@ -52,6 +53,16 @@ function App() {
       return () => clearInterval(id);
     }
   }, [timerActive, displayTime]);
+
+  const savePDF = (e) => {
+    e.preventDefault();
+    generatePDF({
+      casePresentation,
+      clarifyingQuestions,
+      hypothesizing,
+      reflection
+    })
+  }
 
   const updateEmail = (e) => {
     e.preventDefault();
@@ -141,7 +152,7 @@ function App() {
             click AGAIN to send to email address
           </a>
         ) : (
-          <button onClick={updateEmail} className="save-btn">
+          <button onClick={savePDF} className="save-btn">
             SAVE
           </button>
         )}
